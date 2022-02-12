@@ -1,0 +1,25 @@
+<p id="notice"></p>
+<div class="container">
+  <div class="row">
+    <div class="mx-auto">
+      <h2>Users</h2>
+      <table class="table table-stripeds">
+        <tr>
+          <th></th>
+          <th>name</th>
+          <th>introduction</th>
+          <th></th>
+        </tr>
+        <% @users.each do |user| %>
+        <tr>
+          <td><%= attachment_image_tag user, :profile_image, :fill, 45, 45, fallback: "No_image.png", class:"rounded-circle" %></td>
+          <td><%= user.name %></td>
+          <td><%= user.introduction %></td>
+          <td><%= link_to "show", user_path(user) %></td>
+        </tr>
+        <% end %>
+      </table>
+      <%= paginate @users %>
+    </div>
+  </div>
+</div>

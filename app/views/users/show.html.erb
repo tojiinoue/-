@@ -1,0 +1,51 @@
+<% if flash[:notice] %>
+  <div class="flash">
+    <%= flash[:notice] %>
+  </div>
+<% end %>
+<p id="notice"></p>
+<div class="container">
+  <div class="row">
+    <div class="col-md-3 mb-3">
+      <h2>User info</h2>
+      <%= attachment_image_tag @user, :profile_image, :fill, 60, 60, fallback: "No_image.png" %>
+      <table class="table table-striped">
+        <tr>
+          <th>name</th>
+          <th>introduction</th>
+        </tr>
+        <tr>
+          <td><%= @user.name %></td>
+          <td><%= @user.introduction %></td>
+        </tr>
+      </table>
+      <%= link_to edit_user_path(@user), class:"btn btn-outline-secondary" do %>
+        <i class="fas fa-user-cog"></i>
+      <% end %>
+      <h2>New Diary</h2>
+      <%= form_with model:@diary, local:true do |f| %>
+        <label for="inputTitle">title</label><br>
+        <%= f.text_area :title, autofocus: true, id:"inputTitle", placeholder:"title" %><br>
+        <label for="inputBody">body</label><br>
+        <%= f.text_area :body, autofocus: true, id:"inputBody", placeholder:"body" %><br>
+        <%= f.submit "Create Diary" %>
+      <% end %>
+    </div>
+    <div class="col-md-8 offset-md-1 mb-3">
+      <h2>Diary</h2>
+      <table class="table table-striped">
+        <tr>
+          <th>title</th>
+          <th></th>
+        </tr>
+        <% @diaries.each do |diary| %>
+        <tr>
+          <td><%= diary.title %></td>
+          <td><%= link_to "show", diary_path(diary.id) %></td>
+        </tr>
+        <% end %>
+      </table>
+      <%= paginate @diaries %>
+    </div>
+  </div>
+</div>

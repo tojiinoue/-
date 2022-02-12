@@ -1,0 +1,23 @@
+<p id="notice"></p>
+<div class="container">
+  <div class="row">
+    <div class="mx-auto">
+      <h2>編集画面</h2>
+      <% if @diary.errors.any? %>
+        <%= @diary.errors.count %>件のエラーが発生しました
+        <%= @diary.errors.full_messages.each do |message| %>
+          <%= message %>
+        <% end %>
+      <% end %>
+      <%= form_with model:@diary, local:true do |f| %>
+        <label for="inputTitle">title</label><br>
+        <%= f.text_area :title, autofocus: true, id:"inputTitle", placeholder:"title" %><br>
+        <label for="inputBody">body</label><br>
+        <%= f.text_area :body, autofocus: true, id:"inputBody", placeholder:"body" %><br>
+        <%= f.submit "Update Diary" %>
+      <% end %>
+      <%= link_to "show", diary_path(@diary) %> |
+      <%= link_to "back", diaries_path %>
+    </div>
+  </div>
+</div>

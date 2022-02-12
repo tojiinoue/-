@@ -1,0 +1,14 @@
+<div class="container">
+  <div class="row">
+      <div class='mx-auto col-11 col-sm-10 col-lg-8 col-xl-6 mt-3'>
+        <h1>Welcome to <i class="fas fa-book"><strong>Resolution diary</strong>!!!</i></h1>
+        <p>ここでは、自身がプログラミングの際に<br>解決したエラーを<strong>日記</strong>として<br>記録する場所です。</p>
+        <P>エラー解決を<strong>言語化</strong>することで<br><strong>スキルアップ</strong>に繋げましょう！</P>
+        <% if user_signed_in? %>
+        <% else %>
+          <%= link_to 'ログイン', new_user_session_path, class: "btn btn-info btn-sm btn-block mb-3" %>
+          <%= link_to '新規登録', new_user_registration_path, class: "btn btn-success btn-sm btn-block" %>
+        <% end %>
+      </div>
+  </div>
+</div>

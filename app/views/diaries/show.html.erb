@@ -1,0 +1,47 @@
+<% if flash[:notice] %>
+  <div class="flash">
+    <%= flash[:notice] %>
+  </div>
+<% end %>
+<p id="notice"></p>
+<div class="container">
+  <div class="row">
+    <div>
+      <h2>解決詳細ページ</h2>
+      <table class="table table-striped">
+        <tr>
+          <th>title</th>
+        </tr>
+        <tr>
+          <td><%= @diary.title %></td>
+        </tr>
+      </table>
+      <table class="table table-striped">
+        <tr>
+          <th>body</th>
+        </tr>
+        <tr>
+          <td><%= @diary.body %></td>
+        </tr>
+      </table>
+      <% if @diary.user_id == current_user.id %>
+        <%= link_to "edit", edit_diary_path(@diary), class: "btn btn-success" %>
+        <%= link_to "destroy", diary_path(@diary), method: :delete, data: {confirm:"本当に消去しますか？"}, class: "btn btn-danger" %><br>
+      <% end %>
+      <% if @diary.favorited_by?(current_user) %>
+        <p>
+          <%= link_to diary_favorites_path(@diary), method: :delete do %>
+            ♥<%= @diary.favorites.count %>いいね
+          <% end %>
+        </p>
+        <% else %>
+        <p>
+          <%= link_to diary_favorites_path(@diary), method: :post do %>
+            ♡<%= @diary.favorites.count %>いいね
+          <% end %>
+        </p>
+      <% end %>
+      <%= link_to "ユーザー一覧", diaries_path %>
+    </div>
+  </div>
+</div>
